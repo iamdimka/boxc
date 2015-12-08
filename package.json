@@ -1,0 +1,13 @@
+{
+  "name": "boxc",
+  "version": "1.154.5",
+  "description": "An Unofficial NodeJS Library for BoxC API",
+  "author": "Dmitry Sushilov",
+  "keywords": [
+    "boxc",
+    "shipping",
+    "ship"
+  ],
+  "main": "index.js",
+  "license": "ISC"
+}
