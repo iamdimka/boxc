@@ -1,6 +1,6 @@
 {
   "name": "boxc",
-  "version": "1.154.5",
+  "version": "1.154.10",
   "description": "An Unofficial NodeJS Library for BoxC API",
   "author": "Dmitry Sushilov",
   "keywords": [
@@ -8,6 +8,10 @@
     "shipping",
     "ship"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamdimka/boxc.git"
+  },
   "main": "index.js",
   "license": "ISC"
 }

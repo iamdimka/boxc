@@ -9,6 +9,14 @@ class BoxC {
     }
 
     /**
+     * Create instance
+     * @param token
+     */
+    static create(token) {
+        return new BoxC(token);
+    }
+
+    /**
      * Use token
      * @param token
      * @returns {BoxC}
@@ -28,10 +36,10 @@ class BoxC {
      * @returns {String}
      */
     static getAuthorizationURL(applicationID, returnURI) {
-        return 'https://api.boxc.com/v1/oauth/authorize?'. querystring.stringify({
-            application_id: applicationID,
-            return_uri: returnURI
-        });
+        return 'https://api.boxc.com/v1/oauth/authorize?' + querystring.stringify({
+                application_id: applicationID,
+                return_uri: returnURI
+            });
     }
 
     /**
@@ -50,10 +58,7 @@ class BoxC {
             application_id: applicationID,
             application_secret: applicationSecret,
             nonce: nonce
-        }).then(b => {
-            let token = JSON.parse(b.toString()).access_token;
-            return arguments[3] ? token : new BoxC(token);
-        });
+        }).then(json => arguments[3] ? new BoxC(json.access_token) : json.access_token);
     }
 
     /**
@@ -72,7 +77,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     estimate(args) {
-        return request.get(this.token, 'estimate', args).then(b => JSON.parse(b.toString()).estimate);
+        return request.get(this.token, 'estimate', args).then(json => json.estimate);
     }
 
     /**
@@ -89,7 +94,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getInvoices(args) {
-        return request.get(this.token, 'invoices', args).then(request.asJSON);
+        return request.get(this.token, 'invoices', args);
     }
 
     /**
@@ -101,7 +106,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getInvoice(id) {
-        return request.get(this.token, 'invoice/' + id).then(b => JSON.parse(b.toString()).invoice);
+        return request.get(this.token, 'invoice/' + id).then(json => json.invoice);
     }
 
     /**
@@ -113,7 +118,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getLabel(id) {
-        return request.get(this.token, 'labels/' + id).then(b => JSON.parse(b.toString()).label);
+        return request.get(this.token, 'labels/' + id).then(json => json.label);
     }
 
     /**
@@ -125,7 +130,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     createLabel(label) {
-        return request.post(this.token, 'labels', {label: label}).then(b => JSON.parse(b.toString()).label);
+        return request.post(this.token, 'labels', {label: label}).then(json => json.label);
     }
 
     /**
@@ -162,7 +167,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     createManifest(manifest) {
-        return request.post(this.token, 'manifests', {manifest: manifest}).then(b => JSON.parse(b.toString()).manifest);
+        return request.post(this.token, 'manifests', {manifest: manifest}).then(json => json.manifest);
     }
 
     /**
@@ -174,7 +179,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getManifest(id) {
-        return request.get(this.token, 'manifests/' + id).then(b => JSON.parse(b.toString()).manifest);
+        return request.get(this.token, 'manifests/' + id).then(json => json.manifest);
     }
 
     /**
@@ -186,7 +191,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getOverpacks(args) {
-        return request.get(this.token, 'overpacks', args).then(request.asJSON);
+        return request.get(this.token, 'overpacks', args);
     }
 
 
@@ -199,7 +204,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getOverpack(id) {
-        return request.get(this.token, 'overpacks/' + id).then(b => JSON.parse(b.toString()).overpack);
+        return request.get(this.token, 'overpacks/' + id).then(json => json.overpack);
     }
 
     /**
@@ -211,7 +216,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     createOverpack(overpack) {
-        return request.post(this.token, 'overpacks', {overpack: overpack}).then(b => JSON.parse(b.toString()).overpack)
+        return request.post(this.token, 'overpacks', {overpack: overpack}).then(json => json.overpack)
     }
 
     /**
@@ -224,7 +229,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     updateOverpack(id, overpack) {
-        return request.put(this.token, 'overpacks/' + id, {overpack: overpack}).then(b => JSON.parse(b.toString()).overpack);
+        return request.put(this.token, 'overpacks/' + id, {overpack: overpack}).then(json => json.overpack);
     }
 
     /**
@@ -248,7 +253,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getShipments(args) {
-        return request.get(this.token, 'shipments', args).then(request.asJSON);
+        return request.get(this.token, 'shipments', args);
     }
 
     /**
@@ -260,7 +265,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getShipment(id) {
-        return request.get(this.token, 'shipments/' + id).then(b => JSON.parse(b.toString).shipment);
+        return request.get(this.token, 'shipments/' + id).then(json => json.shipment);
     }
 
     /**
@@ -272,7 +277,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     createShipment(shipment) {
-        return request.post(this.token, 'shipments', {shipment: shipment}).then(b => JSON.parse(b.toString).shipment)
+        return request.post(this.token, 'shipments', {shipment: shipment}).then(json => json.shipment)
     }
 
     /**
@@ -307,7 +312,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     getUser() {
-        return request.get(this.token, 'users/me').then(b => JSON.parse(b.toString()).user);
+        return request.get(this.token, 'users/me').then(json => json.user);
     }
 
     /**
@@ -319,7 +324,7 @@ class BoxC {
      * @returns {Promise.<Object>}
      */
     updateUser(user) {
-        return request.put(this.token, 'users/me', {user: user}).then(b => JSON.parse(b.toString()).user);
+        return request.put(this.token, 'users/me', {user: user}).then(json => json.user);
     }
 }
 
