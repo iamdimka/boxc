@@ -27,12 +27,16 @@ var authorizationURL = BoxC.getAuthorizationURL(APPLICATION_ID, returnURI);
 BoxC.createAccessToken(APPLICATION_ID, APPLICATION_SECRET, nonce)
     .then(accessToken => new BoxC(accessToken));
 
-//if last argument will be true, you don't need invoke "new BoxC(accessToken)"
+// if last argument will be true, you don't need invoke "new BoxC(accessToken)"
 
 BoxC.createAccessToken(APPLICATION_ID, APPLICATION_SECRET, nonce, true)
     .then(api => {
         // work with boxc api
     });
+    
+// or create using (/static?) constructor
+(new BoxC(token)) instanceof BoxC
+BoxC.create(token) instanceof BoxC
 ```
 
 ### Estimate
