@@ -73,3 +73,19 @@ BoxC.create(token) instanceof BoxC
 ### Users
 - [getUser()](https://api.boxc.com/v1/docs/users#get)
 - [updateUser(user)](https://api.boxc.com/v1/docs/users#update)
+
+
+## Examples
+
+### estimate
+```js
+api.estimate({
+    country: 'US', // not required, now - default & only US
+    postal_code: '94041', // destination postal code
+    entry_point: 'HKCN', // https://api.boxc.com/site/entry-points
+    height: 10, // cm
+    width: 10, // cm
+    length: 10, // cm
+    weight: 0.9 // kg
+}).then(estimate => console.log(estimate));
+```
