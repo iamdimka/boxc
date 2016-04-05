@@ -25,19 +25,23 @@ var authorizationURL = BoxC.getAuthorizationURL(APPLICATION_ID, returnURI);
 //... after user got authorized, you get nonce
 
 BoxC.createAccessToken(APPLICATION_ID, APPLICATION_SECRET, nonce)
-    .then(accessToken => new BoxC(accessToken));
+  .then(accessToken => new BoxC(accessToken));
 
 // if last argument will be true, you don't need invoke "new BoxC(accessToken)"
 
 BoxC.createAccessToken(APPLICATION_ID, APPLICATION_SECRET, nonce, true)
-    .then(api => {
-        // work with boxc api
-    });
+  .then(api => {
+    // work with boxc api
+  });
     
 // or create using (/static?) constructor
 (new BoxC(token)) instanceof BoxC
 BoxC.create(token) instanceof BoxC
 ```
+
+### Entry Points
+- [getEntryPoints()](https://api.boxc.com/v1/docs/entry-points#search)
+- [getEntryPoint(id)](https://api.boxc.com/v1/docs/entry-points#get)
 
 ### Estimate
 - [estimate(args)](https://api.boxc.com/v1/docs/estimate#get)
@@ -80,12 +84,12 @@ BoxC.create(token) instanceof BoxC
 ### estimate
 ```js
 api.estimate({
-    country: 'US', // not required, now - default & only US
-    postal_code: '94041', // destination postal code
-    entry_point: 'HKCN', // https://api.boxc.com/site/entry-points
-    height: 10, // cm
-    width: 10, // cm
-    length: 10, // cm
-    weight: 0.9 // kg
+  country: 'US', // not required, now - default & only US
+  postal_code: '94041', // destination postal code
+  entry_point: 'HKCN', // https://api.boxc.com/site/entry-points
+  height: 10, // cm
+  width: 10, // cm
+  length: 10, // cm
+  weight: 0.9 // kg
 }).then(estimate => console.log(estimate));
 ```

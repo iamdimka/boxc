@@ -1,6 +1,6 @@
 {
   "name": "boxc",
-  "version": "1.515.0",
+  "version": "1.515.1",
   "description": "An Unofficial NodeJS Library for BoxC API",
   "author": "Dmitry Sushilov",
   "keywords": [
