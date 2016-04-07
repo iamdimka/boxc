@@ -17,6 +17,28 @@ class BoxC {
   }
 
   /**
+   * Retrieves a list of entry points
+   * @link https://api.boxc.com/v1/docs/entry-points#search
+   *
+   * @returns {Promise.<[{address: string, country: string, city: string, id: string}]>}
+   */
+  static getEntryPoints() {
+    return request.get(null, 'entry-points').then(json => json.entry_points);
+  }
+
+  /**
+   * Retrieves an entry point
+   * @link https://api.boxc.com/v1/docs/entry-points#get
+   *
+   * @param {String} id
+   *
+   * @returns {Promise.<{address: string, country: string, city: string, id: string}>}
+   */
+  static getEntryPoint(id) {
+    return request.get(null, `entry-points/${id}`).then(json => json.entry_point);
+  }
+
+  /**
    * Use token
    * @param token
    * @returns {BoxC}
@@ -78,28 +100,6 @@ class BoxC {
    */
   estimate(args) {
     return request.get(this.token, 'estimate', args).then(json => json.estimate);
-  }
-
-  /**
-   * Retrieves a list of entry points
-   * @link https://api.boxc.com/v1/docs/entry-points#search
-   *
-   * @returns {Promise.<[{address: string, country: string, city: string, id: string}]>}
-   */
-  getEntryPoints() {
-    return request.get(this.token, 'entry-points').then(json => json['entry-points']);
-  }
-
-  /**
-   * Retrieves an entry point
-   * @link https://api.boxc.com/v1/docs/entry-points#get
-   *
-   * @param {String} id
-   *
-   * @returns {Promise.<{address: string, country: string, city: string, id: string}>}
-   */
-  getEntryPoint(id) {
-    return request.get(this.token, `entry-points/${id}`).then(json => json['entry_point']);
   }
 
   /**
